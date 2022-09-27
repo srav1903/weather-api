@@ -35,13 +35,19 @@ public class WeatherResource {
     public Weather getWeatherDataById(@PathVariable int id) {
 
         // return not found http code if id is null
-        if (weatherService.getWeatherDataById(id) == null
-                || weatherService.getWeatherDataById(id).getId() == 0) {
+        Weather weath = weatherService.getWeatherDataById(id);
+        if (weath==null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Weather data not found");
         }
+        else {
+            return weath;
+        }
 
-        return weatherService.getWeatherDataById(id);
-    }
+        
+        }
+
+        
+    
 
     // method to add the weather data from POST request
     @RequestMapping(value = "/weather", method = RequestMethod.POST)
